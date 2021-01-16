@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+print(BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,7 +40,7 @@ INSTALLED_APPS = (
     'healthnet',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,5 +86,23 @@ USE_TZ = True
 
 LOGIN_URL = '/healthnet/'
 STATIC_URL = '/static/'
-STATIC_ROOT = ''
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+print('TEMPLATE DIRS:', os.path.join(BASE_DIR, 'templates'))
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'OPTIONS': {
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.request",
+                "django.template.context_processors.static",
+
+            ]
+        }
+    },
+]

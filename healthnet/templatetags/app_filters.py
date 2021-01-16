@@ -32,7 +32,7 @@ def isTimeField(field):
 
 @register.filter(name='isAuthenticated')
 def isAuthenticated(user):
-    return user.is_authenticated()
+    return user.is_authenticated
 
 
 @register.filter(name='getAccountRole')
