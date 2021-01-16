@@ -54,7 +54,7 @@ MIDDLEWARE = (
 ROOT_URLCONF = 'prototype.urls'
 
 WSGI_APPLICATION = 'prototype.wsgi.application'
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
