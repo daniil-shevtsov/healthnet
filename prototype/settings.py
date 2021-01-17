@@ -14,10 +14,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 print(BASE_DIR)
 
-import dj_database_url
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -25,7 +21,7 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 SECRET_KEY = 'sy#ao+7hf0l6g*h)co!l_!tebthwt3m#_k9b#q30=&4iaq7u$3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
@@ -59,8 +55,7 @@ MIDDLEWARE = (
 ROOT_URLCONF = 'prototype.urls'
 
 WSGI_APPLICATION = 'prototype.wsgi.application'
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -69,12 +64,17 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'healthnet_db',
-        'USER': 'admin',
-        'PASSWORD': '',
+        'USER': 'healthnet_user',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
+import dj_database_url
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+
 DATABASES['default'].update(db_from_env)
 
 MEDIA_URL = '/media/'
@@ -102,21 +102,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 print('TEMPLATE DIRS:', os.path.join(BASE_DIR, 'templates'))
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+#         },
+#     },
+# }
 
 TEMPLATES = [
     {
