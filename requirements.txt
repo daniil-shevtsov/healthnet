@@ -1,2 +1,3 @@
 Django
 Whitenoise
+dj-database-url
