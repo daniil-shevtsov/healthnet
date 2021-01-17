@@ -10,12 +10,13 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 print(BASE_DIR)
 
 import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
 
+db_from_env = dj_database_url.config(conn_max_age=500)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -31,7 +32,6 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = [
     '*'
 ]
-
 
 # Application definition
 
@@ -60,7 +60,6 @@ ROOT_URLCONF = 'prototype.urls'
 
 WSGI_APPLICATION = 'prototype.wsgi.application'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 
 
 # Database
@@ -94,7 +93,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
@@ -103,6 +101,22 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 print('TEMPLATE DIRS:', os.path.join(BASE_DIR, 'templates'))
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}
 
 TEMPLATES = [
     {
